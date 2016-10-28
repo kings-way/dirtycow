@@ -24,8 +24,9 @@ chmod 0404 text_file
 chmod a+x poc.bin
 echo "Running the POC...."
 
+#timeout 3 /tmp/dirty_cow_check/poc.bin text_file "BBBB" >> /dev/null 2>>/dev/null
+timeout 3 /tmp/dirty_cow_check/poc.bin text_file "BBBB"
 set +e
-timeout 3 /tmp/dirty_cow_check/poc.bin text_file "BBBB" >> /dev/null 2>>/dev/null
 killall poc.bin >>/dev/null 2>>/dev/null
 set -e
 
