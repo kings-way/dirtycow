@@ -25,7 +25,7 @@ chmod a+x poc.bin
 echo "Running the POC...."
 set +e
 
-if [ ! -x "/usr/bin/timeout" ];then
+if [ -x "/usr/bin/timeout" ];then
 	timeout 3 /tmp/dirty_cow_check/poc.bin text_file "BBBB"
 else
 	/tmp/dirty_cow_check/poc.bin text_file "BBBB" &
